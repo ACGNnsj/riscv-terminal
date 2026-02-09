@@ -1,0 +1,89 @@
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        #terminal {
+            width: 100%;
+            max-width: 1080px;
+            height: 70vh;
+            min-height: 400px;
+            border: 1px solid #ccc;
+            margin: 20px 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #terminal .xterm {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #terminal .xterm-viewport {
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            #terminal {
+                height: 60vh;
+            }
+
+            .controls {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .controls select,
+            .controls button,
+            .controls input {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+
+        .controls {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+  <script type="module" crossorigin src="./assets/index-6898n5Ar.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-BrP-ENHg.css">
+</head>
+<body>
+<div class="controls" style="display: none">
+    <select id="file-select">
+        <option value="linux/fw_payload.elf" selected>Linux + OpenSBI</option>
+        <!--      <option value="linux/rustsbi-prototyper-payload.elf" selected>Linux + OpenSBI</option>-->
+        <option value="linux/bbl/bbl">Linux + Legacy BBL</option>
+    </select>
+    <button id="run-button" disabled>Run</button>
+    <input id="debugger-checkbox" type="checkbox" disabled>Debugger</input>
+</div>
+<div id="terminal"></div>
+</body>
+</html>
