@@ -1,0 +1,2 @@
+linux/fw_payload.elf filter=lfs diff=lfs merge=lfs -text
+linux/rootfs.img filter=lfs diff=lfs merge=lfs -text
