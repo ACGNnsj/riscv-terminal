@@ -1,0 +1,41 @@
+# 工作流名称（自定义）
+name: Deploy GitHub Pages with LFS
+
+# 触发条件：推送到main分支时自动运行
+on:
+  push:
+    branches: ["main"]
+  # 可选：允许手动触发
+  workflow_dispatch:
+
+# 权限配置（必须，否则无法部署Pages）
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 工作流任务
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # 步骤1：拉取仓库代码（关键：开启LFS）
+      - name: Checkout code with LFS
+        uses: actions/checkout@v4  # 用最新版v4
+        with:
+          lfs: true  # 核心：拉取LFS追踪的实际大文件
+
+      # 步骤2：配置GitHub Pages环境
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # 步骤3：上传静态资源（Godot文件都在根目录）
+      - name: Upload static files
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # 部署目录：仓库根目录（适配Godot项目）
+          path: '.'
+
+      # 步骤4：部署到GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v4
